@@ -1,0 +1,47 @@
+﻿<Window x:Class="TestWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestWPF"
+        mc:Ignorable="d"
+        Title="BrightEyeTest" Height="356.999" Width="248.026" WindowStyle="ToolWindow" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="20 8 20 8" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="Height" Value="30" />
+        </Style>
+    </Window.Resources>
+    <Grid Margin="10,0,0,0" Height="319" VerticalAlignment="Top" HorizontalAlignment="Left" Width="228">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <DataGrid AutoGenerateColumns="False" x:Name="tableOneGrid" Margin="25,29,0,66" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="DarkGray"
+            RowBackground="LightGray" AlternatingRowBackground="White" CanUserAddRows="False" HorizontalAlignment="Left" Width="67">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Value}" Header="Id" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid AutoGenerateColumns="False" x:Name="tableTwoGrid" Margin="120,29,0,66" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="DarkGray"
+                  RowBackground="LightGray" AlternatingRowBackground="White" CanUserAddRows="False" HorizontalAlignment="Left" Width="67">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Value}" Header="Id" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Column="1" Margin="6,253,0,10" Width="222" >
+            <Button x:Name="fillTableOneButton" Content="Fill Table 1" Click="FillTableOneButton_Click"  Margin="19,18,19,8" Width="67"  />
+            <Button x:Name="fillTableTwoButton" Content="Fill Table 2" Click="FillTableTwoButton_Click"  Margin="9,18,10,8" Width="67" IsEnabled="False" />
+        </StackPanel>
+        <Label Name="WaitLabel" Content="Wait..." HorizontalAlignment="Left" Margin="89,3,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+
+    </Grid>
+</Window>
