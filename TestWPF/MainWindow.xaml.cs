@@ -82,6 +82,8 @@ namespace TestWPF
         {
             await db.SourseDigits.LoadAsync();
             Random rnd = new Random();
+            
+            //Check if every digit exests in sequence
             int[] values = new int[maxDigit + 1 - minDigit];
             int value;
             var sourcetList = new List<SourceDigit>();
