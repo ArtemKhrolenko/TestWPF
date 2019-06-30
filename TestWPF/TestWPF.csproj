@@ -87,16 +87,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DbDigit.cs" />
-    <Compile Include="DestDigit.cs" />
-    <Compile Include="SourceDigit.cs" />
+    <Compile Include="Model\DbDigit.cs" />
+    <Compile Include="Model\DestDigit.cs" />
+    <Compile Include="Model\SourceDigit.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestContext.cs" />
+    <Compile Include="Model\TestContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
