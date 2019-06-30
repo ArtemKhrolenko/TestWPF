@@ -19,9 +19,11 @@ namespace TestWPF
             Database.SetInitializer<TestContext>(new DropCreateDatabaseIfModelChanges<TestContext>());
             base.OnModelCreating(modelBuilder);
         }
-
-        //public DbSet<DbDigit> Digits { get; set; }
+        
+        //Table 1
         public DbSet<SourceDigit> SourseDigits { get; set; }
+        
+        //Table2
         public DbSet<DestDigit> DestDigits { get; set; }
 
 

@@ -15,6 +15,7 @@ namespace TestWPF
     {
         TestContext db;
 
+        //Digits Range
         private const int minDigit = 1;
         private const int maxDigit = 10;
 
@@ -44,26 +45,33 @@ namespace TestWPF
             WaitLabel.Visibility = Visibility.Visible;
             List<SourceDigit> sourseList = await Task.Run(GetDataForTableOne);
 
-            //delete all records from Table1               
-            if (db.SourseDigits.Count() != 0)
+            try
             {
-                foreach (var entity in db.SourseDigits)
-                    db.SourseDigits.Remove(entity);
+                //delete all records from Table1               
+                if (db.SourseDigits.Count() != 0)
+                {
+                    foreach (var entity in db.SourseDigits)
+                        db.SourseDigits.Remove(entity);
+                    await db.SaveChangesAsync();
+                }
+
+                //Fill Table 1 with new Data
+                db.SourseDigits.AddRange(sourseList);
                 await db.SaveChangesAsync();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.InnerException.InnerException.Message); ;
+            }
 
-            //Fill Table 1 with new Data
-            db.SourseDigits.AddRange(sourseList);
-            await db.SaveChangesAsync();
-
-            //Show message
-            MessageBoxResult result = MessageBox.Show("The Data was added to Table_1",
-                                          "Confirmation",
-                                          MessageBoxButton.OK,
-                                          MessageBoxImage.Information);
+            //Show success message
+            MessageBox.Show("The Data was added to Table_1",
+                            "Confirmation",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
             //Update DataGrid
             tableOneGrid.ItemsSource = db.SourseDigits.Local.ToBindingList();
-            
+
             //Set GUI
             fillTableTwoButton.IsEnabled = true;
             WaitLabel.Visibility = Visibility.Hidden;
@@ -108,23 +116,30 @@ namespace TestWPF
             //Get the sorted list of Data from Table 1
             List<DestDigit> destList = await Task.Run(GetDataForTableTwo);
 
-            //Delete items from Table 2 if any exists
-            if (db.DestDigits.Count() != 0)
+            try
             {
-                foreach (var entity in db.DestDigits)
-                    db.DestDigits.Remove(entity);
-                db.SaveChanges();
+                //Delete items from Table 2 if any exists
+                if (db.DestDigits.Count() != 0)
+                {
+                    foreach (var entity in db.DestDigits)
+                        db.DestDigits.Remove(entity);
+                    db.SaveChanges();
+                }
+
+                //Fill Table 2 with new Data
+                db.DestDigits.AddRange(destList);
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.InnerException.InnerException.Message); ;
             }
 
-            //Fill Table 2 with new Data
-            db.DestDigits.AddRange(destList);
-            await db.SaveChangesAsync();
-
-            //Show message
-            MessageBoxResult result = MessageBox.Show("The Data was added to Table_2",
-                                          "Confirmation",
-                                          MessageBoxButton.OK,
-                                          MessageBoxImage.Information);
+            //Show success message
+            MessageBox.Show("The Data was added to Table_2",
+                            "Confirmation",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
             //Update DataGrid
             tableTwoGrid.ItemsSource = db.DestDigits.Local.ToBindingList();
         }
@@ -149,6 +164,6 @@ namespace TestWPF
 
             return destList;
         }
-        
+
     }
 }
